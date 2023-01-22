@@ -32,8 +32,8 @@ public class ApplicationDbContext : DbContext
         //Database.EnsureDeleted();
         Database.EnsureCreated(); 
     }
-    
-    // public DbSet<UserEntity> Users { get; set; }
+
+    public DbSet<UserEntity> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -46,7 +46,7 @@ public class ApplicationDbContext : DbContext
         builder.HasPostgresExtension("pg_stat_statements");
         builder.HasPostgresExtension("hstore");
         builder.HasPostgresExtension("ltree");
-        // builder.ApplyConfiguration(new UserConfiguration());
+        builder.ApplyConfiguration(new UserConfiguration());
 
         base.OnModelCreating(builder);
     }

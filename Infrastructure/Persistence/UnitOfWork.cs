@@ -16,7 +16,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly ApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    // private IUserRepo _userRepo;
+    private IUserRepo _userRepo;
 
     public UnitOfWork(ApplicationDbContext context, IMapper mapper)
     {
@@ -24,8 +24,8 @@ public class UnitOfWork : IUnitOfWork
         _mapper = mapper;
     }
 
-    // public IUserRepo UserRepo => _userRepo ?? new UserRepo(_context);
-    public IUserRepo UserRepo => throw new NotImplementedException();
+    public IUserRepo UserRepo => _userRepo ?? new UserRepo(_context);
+    //public IUserRepo UserRepo => throw new NotImplementedException();
     
 
     public async Task<bool> SaveChangesAsync() { return (await _context.SaveChangesAsync()) > 0; }

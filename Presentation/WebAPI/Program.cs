@@ -1,7 +1,4 @@
 using Application;
-using Application.Interfaces.Services;
-
-using Domain.Settings;
 using FluentValidation.AspNetCore;
 // using Infrastructure.Identity;
 // using Infrastructure.Identity.Contexts;
@@ -21,7 +18,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
 using WebApi.Extensions;
-
+using Infrastructure.Shared;
 
 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +36,7 @@ builder.Logging.AddSerilog(logger);
 builder.Services.AddApplicationLayer();
 // builder.Services.AddIdentityInfrastructure(config);
 builder.Services.AddPersistenceInfrastructure(config);
-// builder.Services.AddSharedInfrastructure(config);
+builder.Services.AddSharedInfrastructure(config);
 builder.Services.AddCorsRules(config);
 
 // Add services to the container.
